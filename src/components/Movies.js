@@ -3,35 +3,32 @@ import axios from 'axios';
 import general from '../general/general';
 
 class Movies extends Component {
-
-    endpoint = "https://api.themoviedb.org/3/search/movie?api_key=84ee704467841409c9c9b05e0645bfbd&query=Titanic"
-
-
+    apiKey = general.api_key;
+    queryUrl = general.search_url;
+    imageUrl = general.image_url;
+    
     state = {
         movies: [],
+        searchString: 'Titanic',   
     };
 
-
-    getMovie = () => {
-        axios.get(this.endpoint).then(response => {
-
+    getMovies = () => {
+        let endpoint = this.queryUrl+this.apiKey+'&query='+this.state.searchString
+        axios.get(endpoint).then(response => {
             this.setState({
                 movies: response.data.results
             });
         });
     };
 
-
-
-
     componentDidMount() {
-        this.getMovie();
+
+        this.setState({searchString: 'Titanic'})
+
+        this.getMovies();
     }
 
-
-
     render() {
-
         if (this.state.movies.length > 0) {
             let listMovie = this.state.movies.map((movie, index) => {
                 return (
@@ -45,6 +42,9 @@ class Movies extends Component {
                         <p>overview: {movie.overview}</p>
                         <p>popularity: {movie.popularity}</p>
                         <p>poster_path: {movie.poster_path}</p>
+
+                        <img src={this.imageUrl+movie.poster_path}></img>
+
                         <p>release_date: {movie.release_date}</p>
                         <p>title: {movie.title}</p>
                         <p>video: {movie.video}</p>
@@ -65,7 +65,7 @@ class Movies extends Component {
         }
 
         return (
-            <div>Hello World!</div>
+            <div>No se encontraron peliculas para esta búsqueda</div>
         );
     }
 
