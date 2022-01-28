@@ -1,10 +1,18 @@
-import {Component, React} from 'react';
+import { Component, React } from 'react';
+import axios from 'axios';
+import general from '../general/general';
 
-class Movies extends Component{
+class Movies extends Component {
 
-    render(){
+    
 
-        return(
+
+
+
+
+    render() {
+
+        return (
             <div>Hello World!</div>
         );
     }
