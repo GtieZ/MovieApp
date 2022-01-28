@@ -1,4 +1,4 @@
-import { Component, React } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import general from '../general/general';
 
@@ -6,14 +6,14 @@ class Movies extends Component {
     apiKey = general.api_key;
     queryUrl = general.search_url;
     imageUrl = general.image_url;
-    
+
     state = {
         movies: [],
-        searchString: 'Titanic',   
+        searchString: 'Shrek',
     };
 
     getMovies = () => {
-        let endpoint = this.queryUrl+this.apiKey+'&query='+this.state.searchString
+        let endpoint = this.queryUrl + this.apiKey + '&query=' + this.state.searchString
         axios.get(endpoint).then(response => {
             this.setState({
                 movies: response.data.results
@@ -23,7 +23,7 @@ class Movies extends Component {
 
     componentDidMount() {
 
-        this.setState({searchString: 'Titanic'})
+        this.setState({ searchString: 'Titanic' })
 
         this.getMovies();
     }
@@ -33,24 +33,28 @@ class Movies extends Component {
             let listMovie = this.state.movies.map((movie, index) => {
                 return (
                     <div key={index}>
-                        <p>adult: {movie.adult}</p>
-                        <p>backdrop_path: {movie.backdrop_path}</p>
-                        <p>genre_ids: {movie.genre_ids}</p>
                         <p>id: {movie.id}</p>
-                        <p>original_language: {movie.original_language}</p>
-                        <p>original_title: {movie.original_title}</p>
-                        <p>overview: {movie.overview}</p>
-                        <p>popularity: {movie.popularity}</p>
+                        <p>title: {movie.title}</p>
+                        <img src={this.imageUrl + movie.poster_path} alt={movie.title}></img>
                         <p>poster_path: {movie.poster_path}</p>
 
-                        <img src={this.imageUrl+movie.poster_path}></img>
-
+                        <p>original_title: {movie.original_title}</p>
                         <p>release_date: {movie.release_date}</p>
-                        <p>title: {movie.title}</p>
+                        <p>overview: {movie.overview}</p>
+
+                        <p>genre_ids: {movie.genre_ids}</p>
+                        <p>original_language: {movie.original_language}</p>
+
+                        <p>adult: {movie.adult}</p>
+                        <p>backdrop_path: {movie.backdrop_path}</p>
+                        
+                        <p>popularity: {movie.popularity}</p>
                         <p>video: {movie.video}</p>
                         <p>vote_average: {movie.vote_average}</p>
                         <p>vote_count {movie.vote_count}</p>
-                      
+
+                        
+
                         <hr></hr>
 
                     </div>
