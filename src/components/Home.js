@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class Home extends Component {
 
     render() {
@@ -10,8 +9,16 @@ class Home extends Component {
 
                 <h1>HOME</h1>
 
+                
 
-               
+
+             
+
+
+
+
+
+
             </div>
 
         );
