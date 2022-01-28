@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Home from './components/Home';
 import Movies from './components/Movies';
@@ -11,12 +11,12 @@ class Router extends Component {
     render() {
         return (
             <BrowserRouter>
-                <Routes>
-                    <Route path='/' element={<Home />} ></Route>
-                    <Route path='/movie' element={<Movies />} ></Route>
+                <Switch>
+                    <Route exact path='/' component={Home} ></Route>
+                    <Route exact path='/movie/:query' component={Movies} ></Route>
 
-                    <Route path='*' element={<Not_Found />} ></Route>
-                </Routes>
+                    <Route component={Not_Found} ></Route>
+                </Switch>
             </BrowserRouter>
         );
     }

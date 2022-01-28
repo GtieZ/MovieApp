@@ -7,13 +7,18 @@ class Movies extends Component {
     queryUrl = general.search_url;
     imageUrl = general.image_url;
 
+    
+
+    
+
     state = {
         movies: [],
-        searchString: 'Shrek',
+ 
     };
 
     getMovies = () => {
-        let endpoint = this.queryUrl + this.apiKey + '&query=' + this.state.searchString
+        let searchString = this.props.match.params.query;
+        let endpoint = this.queryUrl + this.apiKey + '&query=' + searchString;
         axios.get(endpoint).then(response => {
             this.setState({
                 movies: response.data.results
@@ -23,7 +28,6 @@ class Movies extends Component {
 
     componentDidMount() {
 
-        this.setState({ searchString: 'Titanic' })
 
         this.getMovies();
     }
