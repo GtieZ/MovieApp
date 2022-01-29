@@ -75,7 +75,6 @@ class Movies extends Component {
                                         <p>original_language: {movie.original_language}</p>
 
                                         <p>adult: {movie.adult}</p>
-                                        <p>backdrop_path: {movie.backdrop_path}</p>
 
                                         <p>popularity: {movie.popularity}</p>
                                         <p>vote_average: {movie.vote_average}</p>
