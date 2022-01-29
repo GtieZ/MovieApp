@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 
 
 const MyListComponent = () => {
-    
+
     const reviewList = useSelector(state => state.myList);
     
     return (
-        <div>
+        <div className="text-light">
 
             <h2>este es myList Component</h2>
             <hr/>

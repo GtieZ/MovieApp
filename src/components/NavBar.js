@@ -7,7 +7,7 @@ class NavBar extends Component {
     render() {
         return (
 
-            <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
                     <span className="navbar-brand ms-5"><strong>MovieWeb</strong></span>
 

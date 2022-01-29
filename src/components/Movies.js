@@ -8,26 +8,34 @@ import MovieComponent from './MovieComponent';
 class Movies extends Component {
     apiKey = general.api_key;
     queryUrl = general.search_url;
+
     
     state = {
         movies: [],
-        searched: false
+        query: this.props.query,
+        searched: false,
+        firstQuery: true
     };
 
-    getMovies = () => {
-        let searchString = this.props.match.params.query;
+    getMovies = (searchString) => {
         let endpoint = this.queryUrl + this.apiKey + '&query=' + searchString;
         axios.get(endpoint).then(response => {
             this.setState({
                 movies: response.data.results,
-                searched: true
+                searched: true,
+                firstQuery: false
             });
         });
     };
 
-    componentDidMount() {
-        this.getMovies();
-    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.query !== this.props.query) {
+          this.getMovies(this.props.query);
+        }
+      }
+
+
 
     render() {
         if (this.state.movies.length > 0) {
@@ -39,20 +47,20 @@ class Movies extends Component {
                 )
             });
             return (
-                <div>
+                <div className="mt-4">
                     {listMovie}
                 </div>
             )
         } else if(!this.state.searched){
-
-            return <div>cargando...</div>
+            return <div className="mt-3">
+                    {this.state.firstQuery? '' : 'cargando...'}
+                </div>
         }
-
-        return <div>No se encontraron peliculas para esta búsqueda</div>
+        return <h3 className="text-danger mt-5">
+                    No se encontraron peliculas para esta búsqueda
+                </h3>
         
     }
-
-
 
 }
 

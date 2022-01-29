@@ -105,7 +105,7 @@ const MovieComponent = ({ movie }) => {
                                             &nbsp; (5)
                                         </option>
                                     </select>
-                                    <label for="floatingSelect">
+                                    <label htmlFor="floatingSelect">
                                         Valora esta película
                                     </label>
                                 </div>
@@ -122,8 +122,6 @@ const MovieComponent = ({ movie }) => {
             </div>
         </React.Fragment>
     );
-
-
 };
 
 

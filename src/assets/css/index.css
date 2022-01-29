@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-color: #49505f;
 }
 
 code {
@@ -42,4 +44,18 @@ code {
 
 .modal-title{
   text-align: left;
+}
+
+.query-input{
+  display: inline;
+  width: 25em;
+  height: 50px;
+  text-align: center;
+  
+
+}
+
+.query-button{
+  width: 4em;
+  height: 50px;
 }
