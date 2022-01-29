@@ -22,3 +22,24 @@ code {
 .imageButton{
   width: 200;
 }
+
+.ranking-selector{
+  float: left;
+  width: 11em;
+}
+
+.ranking-button{
+  height: 60px;
+}
+
+.modal-pic{
+  float: left;
+}
+
+.overview{
+  text-align: left;
+}
+
+.modal-title{
+  text-align: left;
+}

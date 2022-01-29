@@ -9,16 +9,17 @@ import noDisponiblePic from '../assets/images/no_disponible.jpg';
 
 const MovieComponent = ({ movie }) => {
 
-    const dispatch = useDispatch();
     const imageUrl = general.image_url;
-
+    const [rankValue, setRankValue] = useState(1);
+    const dispatch = useDispatch();
+    
     const onSubmit = (event) => {
         event.preventDefault();
 
         dispatch(addToList({
             id: movie.id,
             filmTitle: movie.title,
-            reviewValue: Math.random(1, 5),
+            reviewValue: rankValue,
             posterPath: movie.poster_path
         }));
     };
@@ -45,40 +46,77 @@ const MovieComponent = ({ movie }) => {
             </div>
 
             {/* Modal */}
-            <div className="modal fade" id={"staticBackdrop" + movie.id} data-bs-backdrop="static">
-                <div className="modal-dialog">
+            <div className="modal fade" id={"staticBackdrop" + movie.id} 
+                data-bs-backdrop="static"
+            > <div className="modal-dialog">
                     <div className="modal-content">
+
                         <div className="modal-header">
-                            <h5 className="modal-title" id="staticBackdropLabel">{movie.title}</h5>
+                            <h5 className="modal-title">{movie.title}</h5>
                             <button type="button" className="btn-close"
                                 data-bs-dismiss="modal" aria-label="Close"
                             />
-
                         </div>
+                        
                         <div className="modal-body">
-                            <img src={movie.poster_path ? imageUrl + movie.poster_path : noDisponiblePic} />
-                            <p>id: {movie.id}</p>
+                            <img className="modal-pic me-3"
+                                src={movie.poster_path ? imageUrl + movie.poster_path : noDisponiblePic} 
+                            />
+                            <p className="overview text-primary">
+                                <strong>Sinopsis:</strong>
+                            </p>
 
-                            <p>original_title: {movie.original_title}</p>
-                            <p>overview: {movie.overview}</p>
-                            <p>release_date: {movie.release_date}</p>
+                            <p className="overview">{movie.overview}</p>
 
-                            <p>genre_ids: {movie.genre_ids}</p>
-                            <p>original_language: {movie.original_language}</p>
+                            <p className="overview ">
+                                <strong className="text-primary">Fecha:</strong>
+                                <em> {movie.release_date}</em> 
+                            </p>
 
-                            <p>adult: {movie.adult}</p>
-
-                            <p>popularity: {movie.popularity}</p>
-                            <p>vote_average: {movie.vote_average}</p>
-                            <p>vote_count {movie.vote_count}</p>
+                            <p className="overview">
+                                <strong className="text-primary">Idioma original:</strong>
+                                <em> {movie.original_language}</em>  
+                            </p>
                         </div>
+
                         <div className="modal-footer">
                             <form onSubmit={onSubmit}>
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" className="btn btn-primary">Add To List</button>
-                            </form>
+                                <div className="form-floating ranking-selector">
+                                    <select className="form-select" 
+                                        onChange={event => setRankValue(event.target.value)}
+                                    ><option value="1">
+                                            &#9733; &#9734; &#9734; &#9734; &#9734; 
+                                            &nbsp; (1) 
+                                        </option>
+                                        <option value="2">
+                                            &#9733; &#9733; &#9734; &#9734; &#9734; 
+                                            &nbsp; (2)
+                                        </option>
+                                        <option value="3">
+                                            &#9733; &#9733; &#9733; &#9734; &#9734; 
+                                            &nbsp; (3)
+                                        </option>
+                                        <option value="4">
+                                            &#9733; &#9733; &#9733; &#9733; &#9734; 
+                                            &nbsp; (4)
+                                        </option>
+                                        <option value="5">
+                                            &#9733; &#9733; &#9733; &#9733; &#9733; 
+                                            &nbsp; (5)
+                                        </option>
+                                    </select>
+                                    <label for="floatingSelect">
+                                        Valora esta película
+                                    </label>
+                                </div>
 
+                                <button type="submit" 
+                                    className="btn btn-primary ms-2 ranking-button" 
+                                    data-bs-dismiss="modal"
+                                >Submit</button>
+                            </form>
                         </div>
+
                     </div>
                 </div>
             </div>
