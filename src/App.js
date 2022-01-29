@@ -7,10 +7,7 @@ function App() {
   return (
     <div className="App">
 
-      <header></header>
-
-      <Router></Router>
-
+      <Router/>
 
     </div>
   );
