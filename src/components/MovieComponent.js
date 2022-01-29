@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { addToList } from '../data/myListSlice';
 import general from '../general/general';
 import noDisponiblePic from '../assets/images/no_disponible.jpg';
 
@@ -7,7 +9,20 @@ import noDisponiblePic from '../assets/images/no_disponible.jpg';
 
 const MovieComponent = ({ movie }) => {
 
+    const dispatch = useDispatch();
     const imageUrl = general.image_url;
+
+    const onSubmit = (event) => {
+        event.preventDefault();
+
+        dispatch(addToList({
+            id: movie.id,
+            filmTitle: movie.title,
+            reviewValue: Math.random(1, 5),
+            posterPath: movie.poster_path
+        }));
+    };
+
 
     return (
         <React.Fragment>
@@ -58,8 +73,11 @@ const MovieComponent = ({ movie }) => {
                             <p>vote_count {movie.vote_count}</p>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Understood</button>
+                            <form onSubmit={onSubmit}>
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" className="btn btn-primary">Add To List</button>
+                            </form>
+
                         </div>
                     </div>
                 </div>

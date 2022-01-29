@@ -1,22 +1,11 @@
-import React, { useState } from 'react';
-
+import React from 'react';
 import { useSelector } from 'react-redux';
-
-import { useDispatch } from 'react-redux';
-
-import { addList } from '../data/myListSlice';
-
 
 
 const MyListComponent = () => {
-
- 
-
-
+    
     const reviewList = useSelector(state => state.myList);
-    console.log(reviewList);
-
-
+    
     return (
         <div>
 
@@ -31,6 +20,8 @@ const MyListComponent = () => {
                             <p>id: {item.id}</p>
                             <p>filmTitle: {item.filmTitle}</p>
                             <p>reviewValue: {item.reviewValue}</p>
+                            <p>posterPath: {item.posterPath}</p>
+
                             <hr/>
 
                         </div>

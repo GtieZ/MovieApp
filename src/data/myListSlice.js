@@ -2,18 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const myListSlice = createSlice({
     name: 'myList',
-    initialState: [
-        {id: 1, filmTitle: "Pelicula1", reviewValue: 1},
-        {id: 2, filmTitle: "Pelicula2", reviewValue: 5},
-        {id: 3, filmTitle: "Pelicula3", reviewValue: 3},
-        {id: 4, filmTitle: "Pelicula4", reviewValue: 5},
-    ],
+    initialState: [],
     reducers: {
-        addList: (state, action) => {
+        addToList: (state, action) => {
             const newList = {
-                id: Date.now(),
+                id: action.payload.id,
                 filmTitle: action.payload.filmTitle,
-                reviewValue: action.payload.reviewValue
+                reviewValue: action.payload.reviewValue,
+                posterPath: action.payload.posterPath
             };
 
             state.push(newList);
@@ -21,5 +17,5 @@ const myListSlice = createSlice({
     }
 });
 
-export const { addList } = myListSlice.actions;
+export const { addToList } = myListSlice.actions;
 export default myListSlice.reducer;
