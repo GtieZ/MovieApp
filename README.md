@@ -1,3 +1,7 @@
+This is a trainig movie-minimal-webapp created with React using react-redux. It gets the data from themoviedb.org API.
+
+---------------------------------------------------
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
