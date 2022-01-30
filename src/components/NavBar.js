@@ -22,10 +22,10 @@ class NavBar extends Component {
                     <div className="collapse navbar-collapse ms-5" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <NavLink to="/home" className="nav-link">Home</NavLink>
+                                <NavLink to="/home" className="nav-link text-center">Home</NavLink>
                             </li>
                             <li className="nav-item ms-3">
-                                <NavLink to="/mylist" className="nav-link">My List</NavLink>
+                                <NavLink to="/mylist" className="nav-link text-center">My List</NavLink>
                             </li>
                         </ul>
                     </div>

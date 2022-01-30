@@ -1,29 +1,36 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import general from '../general/general';
+import noDisponiblePic from '../assets/images/no_disponible.jpg';
+
 
 const MyListComponent = () => {
+    const imageUrl = general.image_url;
 
     const reviewList = useSelector(state => state.myList);
-    
-    return (
-        <div className="text-light">
 
-            <h2>este es myList Component</h2>
-            <hr/>
+    if (reviewList.length == 0) {
+        return <h4 className="text-light mt-5">Todavía no has valorado ninguna película</h4>
+    }
+
+    return (
+        <div className="text-light align-items-center mt-5 container list-container">
 
             {
                 reviewList.map((item, index) => {
                     return (
                         <div key={index}>
+                            <div className="alert alert-dark mb-5 list-item">
+                                <img className="list-pic mx-3"
+                                    src={item.posterPath ? imageUrl + item.posterPath : noDisponiblePic}
+                                />
+                                <h4 className="text-dark mt-3">{item.filmTitle}</h4>
 
-                            <p>id: {item.id}</p>
-                            <p>filmTitle: {item.filmTitle}</p>
-                            <p>reviewValue: {item.reviewValue}</p>
-                            <p>posterPath: {item.posterPath}</p>
-
-                            <hr/>
-
+                                <p className="list-review">
+                                    Valoración: <strong>{item.reviewValue} &#9734;</strong>
+                                </p>  
+                            </div>
                         </div>
                     )
                 })

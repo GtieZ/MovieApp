@@ -31,7 +31,9 @@ class Movies extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.query !== this.props.query) {
-          this.getMovies(this.props.query);
+            if(this.props.query != ''){
+                this.getMovies(this.props.query);
+            }
         }
       }
 
@@ -52,11 +54,11 @@ class Movies extends Component {
                 </div>
             )
         } else if(!this.state.searched){
-            return <div className="mt-3">
+            return <div className="text-light mt-3">
                     {this.state.firstQuery? '' : 'cargando...'}
                 </div>
         }
-        return <h3 className="text-danger mt-5">
+        return <h3 className="text-light mt-5">
                     No se encontraron peliculas para esta búsqueda
                 </h3>
         

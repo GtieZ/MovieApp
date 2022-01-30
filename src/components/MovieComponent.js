@@ -30,17 +30,20 @@ const MovieComponent = ({ movie }) => {
             <div className="card my-3 me-3 posterCard" >
                 <input type="image"
                     src={movie.poster_path ? imageUrl + movie.poster_path : noDisponiblePic}
-                    className="card-img-top" alt={movie.title}
+                    className="card-img-top image-card" alt={movie.title}
                     data-bs-toggle="modal" data-bs-target={"#staticBackdrop" + movie.id}
                 />
 
-                <div className="card-body">
-                    <p className="card-text">
-                        <strong>{movie.title}</strong>
+                <div className="card-body ">
+                    <p className="overflow-on">
+                        <strong>
+                            {movie.title.length<30 ? movie.title : movie.title.substring(0,30) + '...'}
+                        
+                        </strong>
                     </p>
                 </div>
 
-                <div className="card-footer">
+                <div className="card-footer bg-dark text-light">
                     ({movie.release_date ? movie.release_date.substring(0, 4) : 'sin fecha'})
                 </div>
             </div>
