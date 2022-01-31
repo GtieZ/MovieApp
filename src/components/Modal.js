@@ -27,7 +27,6 @@ const Modal = ({ movie }) => {
 
     const setSelectValue = (id) => {
         if (isItemOnMyList(id)) {
-            console.log(filterList(id)[0].filmTitle, filterList(id)[0].reviewValue);
             return filterList(id)[0].reviewValue;
         }
         else return undefined;
@@ -86,7 +85,7 @@ const Modal = ({ movie }) => {
 
                                     <select className="form-select" disabled={isItemOnMyList(movie.id)}
                                         onChange={event => setRankValue(event.target.value)}
-                                        value={setSelectValue(movie.id)} defaultValue="5"
+                                        value={setSelectValue(movie.id)}
                                     > <option value="1">
                                             &#9733; &#9734; &#9734; &#9734; &#9734;
                                             &nbsp; (1)
