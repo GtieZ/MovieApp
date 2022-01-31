@@ -31,7 +31,7 @@ class Movies extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.query !== this.props.query) {
-            if(this.props.query != ''){
+            if(this.props.query !== ''){
                 this.getMovies(this.props.query);
             }
         }
