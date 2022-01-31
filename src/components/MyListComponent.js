@@ -10,7 +10,7 @@ const MyListComponent = () => {
 
     const reviewList = useSelector(state => state.myList);
 
-    if (reviewList.length == 0) {
+    if (reviewList.length === 0) {
         return <h4 className="text-light mt-5">Todavía no has valorado ninguna película</h4>
     }
 
@@ -22,7 +22,7 @@ const MyListComponent = () => {
                     return (
                         <div key={index}>
                             <div className="alert alert-dark mb-5 list-item">
-                                <img className="list-pic mx-3"
+                                <img className="list-pic mx-3" alt={item.title}
                                     src={item.posterPath ? imageUrl + item.posterPath : noDisponiblePic}
                                 />
                                 <h4 className="text-dark mt-3">{item.filmTitle}</h4>
