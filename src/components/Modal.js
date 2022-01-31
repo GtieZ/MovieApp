@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { addToList } from '../data/myListSlice';
 import general from '../general/general';
@@ -9,7 +9,29 @@ import noDisponiblePic from '../assets/images/no_disponible.jpg';
 const Modal = ({ movie }) => {
     const imageUrl = general.image_url;
     const [rankValue, setRankValue] = useState(1);
+
     const dispatch = useDispatch();
+    const myList = useSelector(state => state.myList);
+
+
+    const isItemOnMyList = (id) => {
+        if (filterList(id).length > 0) {
+            return true;
+        }
+        return false;
+    };
+
+    const filterList = (id) => {
+        return myList.filter(item => item.id === id);
+    };
+
+    const setSelectValue = (id) => {
+        if (isItemOnMyList(id)) {
+            console.log(filterList(id)[0].filmTitle, filterList(id)[0].reviewValue);
+            return filterList(id)[0].reviewValue;
+        }
+        else return undefined;
+    };
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -21,6 +43,7 @@ const Modal = ({ movie }) => {
             posterPath: movie.poster_path
         }));
     };
+
 
     return (
         <React.Fragment>
@@ -60,9 +83,11 @@ const Modal = ({ movie }) => {
                         <div className="modal-footer">
                             <form onSubmit={onSubmit}>
                                 <div className="form-floating ranking-selector">
-                                    <select className="form-select"
+
+                                    <select className="form-select" disabled={isItemOnMyList(movie.id)}
                                         onChange={event => setRankValue(event.target.value)}
-                                    ><option value="1">
+                                        value={setSelectValue(movie.id)} defaultValue="5"
+                                    > <option value="1">
                                             &#9733; &#9734; &#9734; &#9734; &#9734;
                                             &nbsp; (1)
                                         </option>
@@ -83,13 +108,15 @@ const Modal = ({ movie }) => {
                                             &nbsp; (5)
                                         </option>
                                     </select>
+
                                     <label htmlFor="floatingSelect">
-                                        Valora esta película
+                                        {isItemOnMyList(movie.id) ? "Película ya valorada" : 'Valora esta película'}
                                     </label>
                                 </div>
 
                                 <button type="submit"
                                     className="btn btn-primary ms-2 ranking-button"
+                                    disabled={isItemOnMyList(movie.id)}
                                     data-bs-dismiss="modal"
                                 >Submit</button>
                             </form>
