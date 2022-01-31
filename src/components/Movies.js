@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import general from '../general/general';
 
 import MovieComponent from './MovieComponent';
+import general from '../general/general';
 
 
 class Movies extends Component {
     apiKey = general.api_key;
     queryUrl = general.search_url;
 
-    
     state = {
         movies: [],
         query: this.props.query,
         searched: false,
-        firstQuery: true
+        firstQuery: true,
+        onChange: false
     };
 
     getMovies = (searchString) => {
@@ -23,7 +23,8 @@ class Movies extends Component {
             this.setState({
                 movies: response.data.results,
                 searched: true,
-                firstQuery: false
+                firstQuery: false,
+                onChange: false
             });
         });
     };
@@ -31,12 +32,15 @@ class Movies extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps.query !== this.props.query) {
-            if(this.props.query !== ''){
+            this.setState({ onChange: true })
+
+            if (this.props.query !== '') {
                 this.getMovies(this.props.query);
             }
-        }
-      }
 
+
+        }
+    }
 
 
     render() {
@@ -49,19 +53,19 @@ class Movies extends Component {
                 )
             });
             return (
-                <div className="mt-4">
+                <div className="mt-4 queryResult">
                     {listMovie}
                 </div>
             )
-        } else if(!this.state.searched){
+        } else if (!this.state.searched) {
             return <div className="text-light mt-3">
-                    {this.state.firstQuery? '' : 'cargando...'}
-                </div>
+                {this.state.firstQuery ? '' : 'cargando...'}
+            </div>
         }
         return <h3 className="text-light mt-5">
-                    No se encontraron peliculas para esta búsqueda
-                </h3>
-        
+            No se encontraron peliculas para esta búsqueda
+        </h3>
+
     }
 
 }
